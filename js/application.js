@@ -10,11 +10,20 @@ knitApp.addRegions({
 Stitch = Backbone.Model.extend({
     defaults: {
         type: "",
+        color: ""
+    }
+});
+Grid = Backbone.Model.extend({
+    defaults: {
+        numberOfStitches: "",
     }
 });
 // collection of stitches
 Stitches = Backbone.Collection.extend({
   model: Stitch
+});
+Grids = Backbone.Collection.extend({
+  model: Grid
 });
 
 Views = {};
@@ -52,15 +61,18 @@ Views.Grid = Backbone.Marionette.CompositeView.extend({
     itemViewContainer: "section",
     events: {'submit form': 'saveValue'},
     initialize: function() {
-        var number = this.numberOfStitches;
+        var that = this;
+        // var number = this.numberOfStitches;
         var grid = this.collection.groupBy(function(list, iterator) {
-            return Math.floor(iterator / 10); // 4 == number of columns
+            return Math.floor(iterator / that.numberOfStitches); // 4 == number of columns
         });
         this.collection = new Backbone.Collection(_.toArray(grid));
     },
     saveValue: function(ev) {
         ev.preventDefault();
         var $numberOfStitches = $('input[name="number"]').val();
+        this.numberOfStitches = $numberOfStitches
+
         console.log("test save " + $numberOfStitches);
     }
 });
