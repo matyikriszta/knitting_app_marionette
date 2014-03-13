@@ -76,7 +76,7 @@ Views.Grid = Backbone.Marionette.CompositeView.extend({
         console.log("test save " + $numberOfStitches);
     }
 });
-// view for palette
+// view for palettetyh
 Views.PaletteView = Backbone.Marionette.ItemView.extend({
     template: "#palette-template",
     className: 'palette',
