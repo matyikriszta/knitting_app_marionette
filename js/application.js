@@ -71,16 +71,17 @@ Views.Grid = Backbone.Marionette.CompositeView.extend({
         $numberOfStitchesInput.val("");
     }
 });
-
+// view for palette
 Views.PaletteView = Backbone.Marionette.ItemView.extend({
-    template: "#grid-template",
+    template: "#palette-template",
     className: 'palette',
     events: {'click li': 'saveValue'},
 
     saveValue: function(ev) {
+        ev.preventDefault();
         var $target = $(ev.currentTarget);
-        var $newType = $target.val();
-        console.log("test save" + $newType);
+        var $newType = $target.html();
+        console.log("test save " + $newType);
     }
 });
 

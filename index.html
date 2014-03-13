@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Grid App</title>
+  <title>Knit App</title>
   <script src="js/jquery-1.11.0.js"></script>
   <script src="js/underscore.js"></script>
   <script src="js/backbone.js"></script>
@@ -13,17 +13,22 @@
 </head>
 
 <body>
-  
+
+  <div id="palette">
+  </div>
   <div id="grid">
   </div>
 
-  <script type="text/template" id="grid-template">
+  <script type="text/template" id="palette-template">
     <h2>Palette</h2>
-      <ul>
-        <li> </li>
-        <li>x</li>
-        <li>o</li>
-      </ul>
+    <ul>
+      <li> </li>
+      <li>o</li>
+      <li>x</li>
+    </ul>
+  </script>
+
+  <script type="text/template" id="grid-template">
     <h2>Create new pattern</h2>
       <input type="text" id="number" placeholder="Number of stitches in a row:"></input>
       <button>Create pattern</button>
