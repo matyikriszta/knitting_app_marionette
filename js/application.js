@@ -6,8 +6,6 @@ knitApp.addRegions({
   palette: "#palette",
 });
 
-var EventBus = _.clone(Backbone.Events)
-
 // single stitch
 Stitch = Backbone.Model.extend({
     defaults: {
@@ -52,32 +50,27 @@ Views.Grid = Backbone.Marionette.CompositeView.extend({
     template: "#grid-template",
     itemView: Views.GridRow,
     itemViewContainer: "section",
-    numberOfStitches: 24,
-    events: {
-        'click button': 'updateGrid',
-    },
+    events: {'submit form': 'saveValue'},
     initialize: function() {
         var number = this.numberOfStitches;
         var grid = this.collection.groupBy(function(list, iterator) {
-            return Math.floor(iterator / number); // 4 == number of columns
+            return Math.floor(iterator / 10); // 4 == number of columns
         });
         this.collection = new Backbone.Collection(_.toArray(grid));
     },
-
-    updateGrid: function(ev) {
-        ev.preventDefault(); 
-        var $numberOfStitchesInput = $('#number');
-        this.gridView.numberOfStitches = ($numberOfStitchesInput.val());
-        $numberOfStitchesInput.val("");
+    saveValue: function(ev) {
+        ev.preventDefault();
+        var $numberOfStitches = $('input[name="number"]').val();
+        console.log("test save " + $numberOfStitches);
     }
 });
 // view for palette
 Views.PaletteView = Backbone.Marionette.ItemView.extend({
     template: "#palette-template",
     className: 'palette',
-    events: {'click li': 'saveValue'},
+    events: {'click li': 'saveType'},
 
-    saveValue: function(ev) {
+    saveType: function(ev) {
         ev.preventDefault();
         var $target = $(ev.currentTarget);
         var $newType = $target.html();
@@ -89,8 +82,9 @@ Views.PaletteView = Backbone.Marionette.ItemView.extend({
 // function: set number of stitches
 
 Views.FormView = Backbone.Marionette.ItemView.extend({
-    template: "#grid-template",
-    className: 'form'
+    template: "#form-template",
+    className: 'form',
+    events: {'submit form': 'saveValue'},
 });
 
 knitApp.addInitializer(function(options){
@@ -108,8 +102,9 @@ knitApp.addInitializer(function(options){
 
 $(document).ready(function(){
       var stitches = new Stitches([
-        {id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, 
-        {id: 6}, {id: 7}, {id: 8}, {id: 9}, {id: 10}
+        {id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}, {id: 9}, {id: 10},
+        {id: 11}, {id: 12}, {id: 13}, {id: 14}, {id: 15}, {id: 16}, {id: 17}, {id: 18}, {id: 19}, {id: 20},
+        {id: 21}, {id: 22}, {id: 23}, {id: 24}, {id: 25}, {id: 26}, {id: 27}, {id: 28}, {id: 29}, {id: 30}
       ]);
  
   knitApp.start({stitches: stitches});

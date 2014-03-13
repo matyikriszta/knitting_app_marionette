@@ -16,6 +16,8 @@
 
   <div id="palette">
   </div>
+  <div id="form">
+  </div>
   <div id="grid">
   </div>
 
@@ -28,10 +30,15 @@
     </ul>
   </script>
 
+  <script type="text/template" id="form-template">
+  </script>
+
   <script type="text/template" id="grid-template">
     <h2>Create new pattern</h2>
-      <input type="text" id="number" placeholder="Number of stitches in a row:"></input>
-      <button>Create pattern</button>
+      <form>
+        <input type="text" name="number" placeholder="Number of stitches in a row" />
+        <input type="submit" value="Create pattern" />
+      </form>
     <section></section>
   </script>
 
